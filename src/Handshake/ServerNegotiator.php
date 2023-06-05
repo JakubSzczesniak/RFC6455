@@ -114,9 +114,21 @@ class ServerNegotiator implements NegotiatorInterface {
         $response = new Response(101, array_merge($headers, [
             'Upgrade'              => 'websocket'
             , 'Connection'           => 'Upgrade'
+            
             , 'Sec-WebSocket-Accept' => $this->sign((string)$request->getHeader('Sec-WebSocket-Key')[0])
             , 'X-Powered-By'         => 'Ratchet'
         ]));
+        
+        $headers = [];
+        $response = new Response(101, array_merge($headers, [
+            'Upgrade'              => 'websocket'
+            , 'Connection'           => 'Upgrade'
+            , 'Sec-WebSocket-Version' => '13'
+            , 'Sec-WebSocket-Protocol' => 'ocpp1.6'
+            , 'Sec-WebSocket-Accept' => $this->sign((string)$request->getHeader('Sec-WebSocket-Key')[0])
+        ]));
+        
+        return $response;
 
         try {
             $perMessageDeflateRequest = PermessageDeflateOptions::fromRequestOrResponse($request)[0];
