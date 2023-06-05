@@ -103,7 +103,7 @@ class ServerNegotiator implements NegotiatorInterface {
             }, null);
 
             if ($this->_strictSubProtocols && null === $match) {
-                return new Response(426, $upgradeSuggestion, null, '1.1', 'No Sec-WebSocket-Protocols requested supported');
+         //       return new Response(426, $upgradeSuggestion, null, '1.1', 'No Sec-WebSocket-Protocols requested supported');
             }
 
             if (null !== $match) {
@@ -114,7 +114,6 @@ class ServerNegotiator implements NegotiatorInterface {
         $response = new Response(101, array_merge($headers, [
             'Upgrade'              => 'websocket'
             , 'Connection'           => 'Upgrade'
-            
             , 'Sec-WebSocket-Accept' => $this->sign((string)$request->getHeader('Sec-WebSocket-Key')[0])
             , 'X-Powered-By'         => 'Ratchet'
         ]));
