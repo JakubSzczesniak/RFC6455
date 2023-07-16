@@ -42,5 +42,8 @@
             "@abtest-server",
             "@phpunit"
         ]
+    },
+     "branch-alias": {
+        "dev-master": "0.3.1"
     }
 }
